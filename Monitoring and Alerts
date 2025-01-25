@@ -1,0 +1,5 @@
+aws cloudwatch put-metric-alarm --alarm-name "HighCPUUsage" \
+--metric-name CPUUtilization --namespace AWS/EC2 --statistic Average \
+--period 300 --threshold 80 --comparison-operator GreaterThanThreshold \
+--dimensions Name=InstanceId,Value=<INSTANCE_ID> --evaluation-periods 2 \
+--alarm-actions <SNS_TOPIC_ARN>
