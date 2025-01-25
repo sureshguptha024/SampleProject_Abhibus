@@ -1,0 +1,23 @@
+const express = require('express');
+const app = express();
+const port = 3000;
+
+app.use(express.json());
+
+// Dummy data
+let bookings = [];
+
+app.post('/book', (req, res) => {
+  const { userId, busId, date, seats } = req.body;
+  const booking = { id: bookings.length + 1, userId, busId, date, seats };
+  bookings.push(booking);
+  res.status(201).send(booking);
+});
+
+app.get('/bookings', (req, res) => {
+  res.send(bookings);
+});
+
+app.listen(port, () => {
+  console.log(`Booking service running on port ${port}`);
+});
