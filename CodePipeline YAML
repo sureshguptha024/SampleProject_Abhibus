@@ -1,0 +1,16 @@
+version: 0.2
+phases:
+  build:
+    commands:
+      - echo "Building backend"
+      - npm install
+      - npm test
+  post_build:
+    commands:
+      - echo "Pushing to ECR"
+      - docker build -t abhibus-backend .
+      - docker tag abhibus-backend:latest <ecr_repo_uri>
+      - docker push <ecr_repo_uri>
+artifacts:
+  files:
+    - '**/*'
